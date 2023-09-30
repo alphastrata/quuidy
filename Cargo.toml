@@ -1,0 +1,15 @@
+[package]
+name = "quuidy"
+version = "0.1.0"
+edition = "2021"
+author = "jer <alphastrata@gmail.com"
+description = """The simplest UUID v4 generation cli tool out there."""
+opt-level = 3
+keywords = ["bevy-uuid", "uuid", "uuid-generation", "uuid-cli"]
+publish = true
+license = "MIT"
+readme = "README.md"
+
+[dependencies.uuid]
+version = "1.4.1"
+features = ["v4", "fast-rng"]
