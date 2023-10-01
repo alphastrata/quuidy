@@ -1,24 +1,25 @@
-use std::env;
+use clap::Parser;
 use uuid::Uuid;
 
+#[derive(Debug, clap::Parser)]
+struct Cli {
+    /// Number of uuids you want.
+    #[clap(short, long)]
+    count: u32,
+    /// Do you want them printed in the Bevy #[Uuid = "your uuid here"] syntax.
+    #[clap(short, long, default_value_t = false)]
+    bevy: bool,
+}
+
 fn main() {
-    let args: Vec<String> = env::args().collect();
+    let cli = Cli::parse();
 
-    if args.len() != 3 {
-        eprintln!("Usage: {} -n [number]", args[0]);
-        std::process::exit(1);
-    }
-
-    let count: u32 = match args[2].parse() {
-        Ok(n) => n,
-        Err(_) => {
-            eprintln!("Invalid number");
-            std::process::exit(1);
-        }
-    };
-
-    (0..count).for_each(|_| {
+    (0..cli.count).for_each(|_| {
         let uuid = Uuid::new_v4();
-        println!("{}", uuid);
+        if cli.bevy {
+            println!("#[Uuid = \"{}\"]", uuid);
+        } else {
+            println!("{}", uuid);
+        }
     });
 }

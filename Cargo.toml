@@ -1,6 +1,6 @@
 [package]
 name = "quuidy"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 author = "jer <alphastrata@gmail.com"
 description = """The simplest UUID v4 generation cli tool out there."""
@@ -9,6 +9,9 @@ keywords = ["bevy-uuid", "uuid", "uuid-generation", "uuid-cli"]
 publish = true
 license = "MIT"
 readme = "README.md"
+
+[dependencies]
+clap = { version = "4.4.6", features = ["derive"] }
 
 [dependencies.uuid]
 version = "1.4.1"
