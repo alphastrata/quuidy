@@ -14,5 +14,5 @@ readme = "README.md"
 clap = { version = "4.4.6", features = ["derive"] }
 
 [dependencies.uuid]
-version = "1.4.1"
-features = ["v4", "fast-rng"]
+version = "1.7.0"
+features = ["v4", "v7", "fast-rng"]

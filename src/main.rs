@@ -9,13 +9,22 @@ struct Cli {
     /// Do you want them printed in the Bevy #[Uuid = "your uuid here"] syntax.
     #[clap(short, long, default_value_t = false)]
     bevy: bool,
+
+    /// Force UUID_V7 instead of V4
+    #[clap(long, default_value_t = false)]
+    seven: bool,
 }
 
 fn main() {
     let cli = Cli::parse();
 
     (0..cli.count).for_each(|_| {
-        let uuid = Uuid::new_v4();
+        let uuid = if cli.seven {
+            Uuid::now_v7()
+        } else {
+            Uuid::new_v4()
+        };
+
         if cli.bevy {
             println!("#[Uuid = \"{}\"]", uuid);
         } else {
