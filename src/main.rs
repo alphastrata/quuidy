@@ -5,7 +5,8 @@ use uuid::Uuid;
 struct Cli {
     /// Number of uuids you want.
     #[clap(short, long)]
-    count: u32,
+    number: u32,
+
     /// Do you want them printed in the Bevy #[Uuid = "your uuid here"] syntax.
     #[clap(short, long, default_value_t = false)]
     bevy: bool,
@@ -18,7 +19,7 @@ struct Cli {
 fn main() {
     let cli = Cli::parse();
 
-    (0..cli.count).for_each(|_| {
+    (0..cli.number).for_each(|_| {
         let uuid = if cli.seven {
             Uuid::now_v7()
         } else {
@@ -26,7 +27,7 @@ fn main() {
         };
 
         if cli.bevy {
-            println!("#[Uuid = \"{}\"]", uuid);
+            println!("weak_handle!(\"{}\")", uuid);
         } else {
             println!("{}", uuid);
         }
